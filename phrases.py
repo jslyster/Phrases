@@ -4,15 +4,6 @@ import string
 import access_docx as ad
 from ODTReader.odtreader import odtToText
 
-def analyze_text(text, min_length, max_length):
-    repeated_phrases = {}
-    for length in range(min_length, max_length + 1):
-        phrases = generate_phrases(text, length)
-        for phrase, count in phrases.items():
-            if count > 1:
-                repeated_phrases[phrase] = count
-    return repeated_phrases
-
 
 def generate_phrases(text, phrase_length):
     words = [word.strip(string.punctuation).lower() for word in text.split()]
