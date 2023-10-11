@@ -1,17 +1,30 @@
 doc_header = "Phrases, version 0.1"
 
 doc_text = (
-        "<h1 font-weight: bold; style=\"color: red; text-align: center\">Phrases, version 0.1</h1><p>Phrases lets you scan a text file, "
+        "Phrases lets you scan a text file, "
         "Word document (DOCX), or "
-        "OpenOffice/LibreOffice document (ODT)."
+        "OpenOffice/LibreOffice document (ODT).\n\n"
         "When you open a document, the program automatically scans that file based on the values specified "
-        "under Minimum and Maximum</p>"
-
+        "under Minimum and Maximum.\n\n"
+        "Note that you can set the minimum and maximum before OR AFTER you open your file. If you change the values "
+        "after opening the file, you will need to click the 'Re-analyze File' button.\n\n"
+        "The program will let you save your results to either a text file or a CSV spreadsheet that can be opened in "
+        "most spreadsheet applications including Microsoft Excel, OpenOffice Calc, and LibreOffice Calc. If you don't "
+        "use any of these applications, don't worry; odds are extremely good your spreadsheet software will be able to "
+        "open a CSV file.\n\n"
+        
+        "This program is available under the General Public License version 3.\n\n"
+        
+        "This application comes with absolutely no warranty."
         )
 
 
 
-jon_bio = "Jonathan Lyster is a programmer, teacher, and writer living on Vancouver Island with his wife and three cats. When he isn't crafting software and writing science fiction and fantasy novels, he is pondering world domination."
+jon_bio = (
+        "Jonathan Lyster is a programmer, instructor, and writer living on Vancouver Island with his wife and "
+        "three cats. When he isn't crafting software and writing science fiction and fantasy novels, "
+        "he is plotting world domination."
+        )
 
 image_path = "./images/jonathan.png"
 

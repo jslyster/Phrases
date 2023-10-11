@@ -3,10 +3,9 @@ from tkinter import *
 from tkinter import filedialog
 from tkinter import scrolledtext
 from tkinter import messagebox
-from tkhtmlview import HTMLLabel
-import os
 import base64
 import webbrowser
+import os
 
 import docs
 import phrases
@@ -46,7 +45,6 @@ class PhrasesUI:
         self.current_min = IntVar()
         self.current_max = IntVar()
 
-        # self.jsl_image = PhotoImage(file=docs.image_path)
         self.jsl_image = PhotoImage(data=base64.b64decode(docs.jon_image))
 
         self.file_name_label = None
@@ -126,7 +124,6 @@ class PhrasesUI:
         self.results_textbox = scrolledtext.ScrolledText(self.results_frame)
         self.results_textbox.pack(side="left", fill="both", expand=True)
         self.results_textbox.bind("<Key>", lambda e: "break")
-
 
     def min_validation(self, e):
         minimum = self.current_min.get()
@@ -298,8 +295,21 @@ class PhrasesUI:
         doc_win.geometry('800x600')
         doc_win.resizable(width=False, height=False)
 
-        htmlview = HTMLLabel(doc_win, html=docs.doc_text, background="white", borderwidth="5", border=True)
-        htmlview.pack(fill="both", expand=True, padx=(5,5), pady=(5,5))
+        doc_view = scrolledtext.ScrolledText(doc_win, wrap='word')
+
+        header_len = len(docs.doc_header)
+        header_len = "1." + str(header_len)
+
+        doc_view.insert("1.0", docs.doc_header)
+        doc_view.insert(END, '\n\n')
+        # doc_view.config(font=('Arial', 12, 'normal'))
+        doc_view.insert(END, docs.doc_text)
+
+        doc_view.tag_add('header', '1.0', header_len)
+        doc_view.tag_configure('header', font='helvetica 14 bold')
+
+        doc_view.pack(fill="both", expand=True, padx=(5,5), pady=(5,5))
+        doc_view.bind("<Key>", lambda e: "break")
 
         ok_button = Button(doc_win, text="OK", width=10, command=doc_win.destroy)
         ok_button.pack(side=RIGHT, padx=(5,5), pady=(5,5))
@@ -309,23 +319,20 @@ class PhrasesUI:
     def about_phrases(self):
         about_win = Toplevel()
         about_win.title("About Phrases")
-        about_win.geometry("700x300")
+        # about_win.geometry("700x300")
         about_win.resizable(width=False, height=False)
 
         jsl_label = Label(about_win, image=self.jsl_image, anchor="n", justify=LEFT)
         jsl_label.grid(row=0, column=0, sticky="nw", padx=(5,0), pady=(5,0))
 
-        # htmlview = HTMLLabel(about_win, html=docs.jon_bio, background="white", borderwidth="5", border=True, wrap="word", width=75)
-        # htmlview.grid(row=0, column=1, sticky="n", padx=(5,5), pady=(5,0))
-
         jsl_bio_label = Label(about_win, text=docs.jon_bio, wraplength=500, anchor="n", justify=LEFT, padx=5, pady=5, border=True, borderwidth=5, relief=GROOVE)
         jsl_bio_label.grid(row=0, column=1, sticky="news", padx=(5,5), pady=(5,0))
 
         btn_web = Button(about_win, text="Author website", width="50", command=self.author_website)
-        btn_web.grid(row=2, column=0, columnspan=2, sticky="W", padx=(5,5))
+        btn_web.grid(row=2, column=0, columnspan=2, sticky="W", padx=(5,5), pady=(5,5))
 
         btn_ok = Button(about_win, text="OK", width="10", command=about_win.destroy)
-        btn_ok.grid(row=2, column=0, columnspan=2, sticky="E", padx=(5,5))
+        btn_ok.grid(row=2, column=0, columnspan=2, sticky="E", padx=(5,5), pady=(5,5))
 
     def author_website(self):
         webbrowser.open_new("https://jslyster.com/")
