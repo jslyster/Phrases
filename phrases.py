@@ -2,7 +2,7 @@ import re
 import collections
 import string
 import access_docx as ad
-from ODTReader.odtreader import odtToText
+from odtreader import odtToText
 import platform
 
 def generate_phrases(text, phrase_length):
@@ -46,7 +46,6 @@ def get_phrases(text, min_words, max_words, min_repetitions):
 
 
 def save_results_as_text(file_path, results):
-    print(platform.system())
     if platform.system() == 'Windows':
         end_of_line = '\r\n'
     else:
