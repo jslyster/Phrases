@@ -45,6 +45,13 @@ def get_phrases(text, min_words, max_words, min_repetitions):
     return results_dict
 
 
+def set_file_extension(file_path, extension):
+    extension = "." + extension.lower()
+    if file_path[-4:].lower() != extension:
+        file_path += extension
+
+    return file_path
+
 def save_results_as_text(file_path, results):
     if platform.system() == 'Windows':
         end_of_line = '\r\n'
@@ -55,9 +62,9 @@ def save_results_as_text(file_path, results):
         results_text += phrase + ": " + str(count) + end_of_line
 
     try:
+        file_path = set_file_extension(file_path, "txt")
         with open(file_path, "w") as file:
             file.write(results_text)
-
         return 0
     except:
         return -1
@@ -69,6 +76,7 @@ def save_results_as_csv(file_path, results):
         results_csv += '"' + phrase + '", "' + str(count) + '"\n'
 
     try:
+        file_path = set_file_extension(file_path, "csv")
         with open(file_path, "w") as file:
             file.write(results_csv)
         return 0
